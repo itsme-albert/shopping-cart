@@ -1,9 +1,11 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext, createContext } from "react";
 import {ProductList} from "./_components/ProductList";
 import {Cart} from "./_components/Cart";
 import { FaOpencart } from "react-icons/fa";
 import { RiShoppingCartFill } from "react-icons/ri";
+
+// const CartContext = createContext();
 
 
 export default function Home() {
@@ -15,8 +17,12 @@ export default function Home() {
   };
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify([cart]));
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
+
+  const addToCart = () => {};
+  const removeToCart = () => {};
+  const checkOut = () => {};
 
   return (
     <div className="bg-white min-h-screen">
@@ -42,7 +48,7 @@ export default function Home() {
             cartVisible ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <Cart />
+          {/* <Cart /> */}
         </div>
       </div>
     </div>

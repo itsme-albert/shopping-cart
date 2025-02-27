@@ -2,7 +2,7 @@ import React from 'react';
 import {useState, useEffect, useReducer, useContext} from 'react';
 import {ProductItem} from './ProductItem';
 
-const products = [
+const product = [
     {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, image: '/images/iphone16pro.png'},
     {id: 2, name: 'S25 ULTRA 12/256GB T.SBLU SAMSUNG SM-S938 GALAXY', price: 84990, image: '/images/s25ultra.png'},
     {id: 3, name: 'IPHONE 15 PRO 256GB WHITE TITNM APPLE', price: 68990, image: '/images/iphone15.png'},
@@ -12,7 +12,7 @@ const products = [
 export const ProductList = () => {
     const [search, setSearch] = useState("");
 
-    const filteredProducts = products.filter((product) => {
+    const filteredProducts = product.filter((product) => {
         return product.name.toLowerCase().includes(search.toLowerCase());
     });
 

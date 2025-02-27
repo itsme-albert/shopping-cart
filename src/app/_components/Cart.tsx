@@ -2,7 +2,7 @@ import React from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import { CartItems } from './CartItems';
 
-export const Cart = () => {
+export const Cart = (props: {product:any}) => {
   return (
     <div>
       <div className="mb-10 text-center font-bold">
@@ -12,7 +12,7 @@ export const Cart = () => {
             </div>
         </div>
         <div className="">
-            {/* <CartItems /> */}
+            <CartItems product={props.product}/>
         </div>
             
         </div>
