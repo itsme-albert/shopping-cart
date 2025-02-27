@@ -12,7 +12,7 @@ export const Cart = () => {
             </div>
         </div>
         <div className="">
-            <CartItems/>
+            {/* <CartItems /> */}
         </div>
             
         </div>

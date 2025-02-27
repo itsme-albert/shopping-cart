@@ -1,10 +1,10 @@
 import React from 'react'
 import { HiOutlineTrash } from "react-icons/hi2";
 
-export const CartItems = () => {
+export const CartItems = (props: {product:any}) => {
 
     const addToCart = () => {
-        console.log('Added to cart');
+        console.log('Added to cart', props.product);
     }
     return (
         <div className='text-center justify-center'>

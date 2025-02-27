@@ -1,5 +1,5 @@
 'use client';
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import {ProductList} from "./_components/ProductList";
 import {Cart} from "./_components/Cart";
 import { FaOpencart } from "react-icons/fa";
@@ -8,10 +8,15 @@ import { RiShoppingCartFill } from "react-icons/ri";
 
 export default function Home() {
   const [cartVisible, setCartVisible] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const toggleCart = () => {
     setCartVisible((prev) => !prev);
   };
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify([cart]));
+  }, [cart]);
 
   return (
     <div className="bg-white min-h-screen">
