@@ -3,6 +3,10 @@ import { MdOutlineStar } from "react-icons/md";
 import Image from 'next/image'
 
 export const ProductItem = ({product}: {product:{id:number, name:string, price:number, image:string}}) => {
+    const addToCart = () => {
+        console.log('Added to cart');
+    }
+
   return (
     <div>
       <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -21,7 +25,7 @@ export const ProductItem = ({product}: {product:{id:number, name:string, price:n
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-gray-900 dark:text-white">Php {product.price}</span>
-                    <a href="#" className="text-white focus:ring-4 focus:outline-none bg-orange-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Add to cart</a>
+                    <button className="text-white focus:ring-4 focus:outline-none bg-orange-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={addToCart}>Add to cart</button>
                 </div>
             </div>
         </div>

@@ -1,8 +1,7 @@
 'use client';
-import Image from "next/image";
-import { useState } from "react";
-import {ProductList} from "./components/ProductList";
-import {Cart} from "./components/Cart";
+import { useState, useContext } from "react";
+import {ProductList} from "./_components/ProductList";
+import {Cart} from "./_components/Cart";
 import { FaOpencart } from "react-icons/fa";
 import { RiShoppingCartFill } from "react-icons/ri";
 
@@ -44,3 +43,5 @@ export default function Home() {
     </div>
   );
 }
+
+// export const useCart = () => useContext(CartContext);
