@@ -16,6 +16,7 @@ export const ProductItem = ({product}:ProductProp) => {
     
     const addToCart = () => {
         dispatch({type: 'ADD', item: product})
+        console.log(dispatch)
     };
     return (
       <div>

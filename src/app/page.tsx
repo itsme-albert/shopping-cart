@@ -26,7 +26,7 @@ export default function Home() {
   }, []);
 
   const addToCart = () => {
-    
+
   };
   const removeToCart = () => {};
   const checkOut = () => {};
@@ -56,7 +56,7 @@ export default function Home() {
               cartVisible ? "translate-x-0" : "translate-x-full"
             }`}
           >
-            {/* <Cart /> */}
+            <Cart />
           </div>
         </CartContext.Provider>
       </div>
