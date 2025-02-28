@@ -1,7 +1,6 @@
 import React from 'react';
 import {useState, useEffect, useReducer, useContext} from 'react';
 import {ProductItem} from './ProductItem';
-import {CartProvider } from '../_context/CartContext'
 
 const product = [
     {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, quantity:1, image: '/images/iphone16pro.png'},
