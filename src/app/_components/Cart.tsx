@@ -19,9 +19,9 @@ export const Cart = () => {
                   <p>Your cart is empty!</p>
                 ) : (
                   <div className="">
-                    {cartState.items.map((item:any) => (
-                      <CartItems key={item.id} product={item}/>
-                    ))}
+                        {cartState.items.map((item:any) => (
+                          <CartItems key={item.id} product={item}/>
+                        ))}
                   </div>
                 )};
             </div>

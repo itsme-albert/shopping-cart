@@ -14,18 +14,18 @@ const cartReducer = (state:any, action:any) => {
   }
 };
 
-const cartcontext = createContext<any>(null);
+const CartContextInstance  = createContext<any>(null);
 
 export const CartContext = ({children}:{children:React.ReactNode}) => {
   const [cartState, dispatch] = useReducer(cartReducer, {items: []});
   return (
     <div>
-      <cartcontext.Provider value={{cartState, dispatch}}>
+      <CartContextInstance.Provider value={{cartState, dispatch}}>
         {children}
-      </cartcontext.Provider>
+      </CartContextInstance.Provider>
     </div>
   )
 };
 
-export const useCart = () => useContext(cartcontext);
+export const useCart = () => useContext(CartContextInstance);
 
