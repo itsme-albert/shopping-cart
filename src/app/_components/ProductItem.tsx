@@ -1,8 +1,22 @@
 import React from 'react'
 import { MdOutlineStar } from "react-icons/md";
 import Image from 'next/image'
+import {useCart} from '../_context/CartContext'
 
-export const ProductItem = (product:{name:string, image:string, price:number}) => {
+type ProductProp = {
+    product:{
+        name: string,
+        image: string,
+        price:number,
+    }
+}
+
+export const ProductItem = ({product}:ProductProp) => {
+    const {dispatch} = useCart();
+    
+    const addToCart = () => {
+        dispatch({type: 'ADD', item: product})
+    };
     return (
       <div>
         <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
@@ -21,7 +35,7 @@ export const ProductItem = (product:{name:string, image:string, price:number}) =
                   </div>
                   <div className="flex items-center justify-between">
                       <span className="text-2xl font-bold text-gray-900 dark:text-white">Php {product.price}</span>
-                      <button className="text-white focus:ring-4 focus:outline-none bg-orange-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center" >Add to cart</button>
+                      <button className="text-white focus:ring-4 focus:outline-none bg-orange-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={addToCart}>Add to cart</button>
                   </div>
               </div>
           </div>
