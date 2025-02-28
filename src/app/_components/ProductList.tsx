@@ -4,10 +4,10 @@ import {ProductItem} from './ProductItem';
 import {CartProvider } from '../_context/CartContext'
 
 const product = [
-    {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, image: '/images/iphone16pro.png'},
-    {id: 2, name: 'S25 ULTRA 12/256GB T.SBLU SAMSUNG SM-S938 GALAXY', price: 84990, image: '/images/s25ultra.png'},
-    {id: 3, name: 'IPHONE 15 PRO 256GB WHITE TITNM APPLE', price: 68990, image: '/images/iphone15.png'},
-    {id: 4, name: 'IS25+ 12/256GB MINT SAMSUNG SM-S936 GALAXY', price: 67990, image: '/images/s25plus.png'},
+    {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, quantity:1, image: '/images/iphone16pro.png'},
+    {id: 2, name: 'S25 ULTRA 12/256GB T.SBLU SAMSUNG SM-S938 GALAXY', price: 84990, quantity:1, image: '/images/s25ultra.png'},
+    {id: 3, name: 'IPHONE 15 PRO 256GB WHITE TITNM APPLE', price: 68990, quantity:1, image: '/images/iphone15.png'},
+    {id: 4, name: 'IS25+ 12/256GB MINT SAMSUNG SM-S936 GALAXY', price: 67990, quantity:1, image: '/images/s25plus.png'},
 ];
 
 export const ProductList = () => {

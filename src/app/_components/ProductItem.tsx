@@ -7,12 +7,13 @@ type ProductProp = {
     product:{
         name: string,
         image: string,
+        quantity: number,
         price:number,
     }
 }
 
 export const ProductItem = ({product}:ProductProp) => {
-    const {dispatch} = useCart();
+    const {cartState, dispatch} = useCart();
     
     const addToCart = () => {
         dispatch({type: 'ADD', item: product})

@@ -6,9 +6,13 @@ const cartReducer = (state:any, action:any) => {
     case 'ADD':
       return {...state, items:[...state.items, action.item]};
     case 'REMOVE':
-      return {...state, items: state.items.filter((item:any) => item.id !== action.id)}
+      return {...state, items: state.items.filter((item:any) => item.id !== action.id)};
     case 'CHECKOUT':
       return {items: []};
+    case 'DECREMENT':
+      return {...state, items: state.items.map((item:any) => item.id === action.id ? {...item, quantity: item.quantity - 1} : item)};
+    case 'INCREMENT':
+      return {...state, items: state.items.map((item:any) => item.id === action.id ? {...item, quantity: item.quantity + 1} : item)};
     default:
       return state;
   }

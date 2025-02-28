@@ -8,6 +8,7 @@ type PropsItem = {
         id: string,
         name: string,
         image:string,
+        quantity: number,
         price: number,
     }
 }
@@ -18,6 +19,16 @@ export const CartItems = ({item}:PropsItem) => {
     const removeFromCart = () => {
         dispatch({type: 'REMOVE', id: item.id})
     };
+
+    const minusQty = () => {
+        if(item.quantity > 1) {
+            dispatch({type: 'DECREMENT', id: item.id})
+        }
+    }
+    const plusQty = () => {
+        dispatch({type: 'INCREMENT', id: item.id})
+    }
+
     return (
         <div className='text-center justify-center'>
             <div className="border-gray-700">
@@ -29,13 +40,13 @@ export const CartItems = ({item}:PropsItem) => {
                             <div className="flex items-center mt-2.5">
                                 <span className="text-md text-gray-900 dark:text-white">Php {item.price}</span>
                                 <div className="inline-flex rounded-md shadow-xs ml-3" role="group">
-                                    <button type="button" className="px-2 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                                    <button type="button" className="px-2 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white" onClick={minusQty}>
                                         -
                                     </button>
                                     <button type="button" className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
-                                        0
+                                        {item.quantity}
                                     </button>
-                                    <button type="button" className="px-2 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
+                                    <button type="button" className="px-2 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white" onClick={plusQty}>
                                         +
                                     </button>
                                 </div>
