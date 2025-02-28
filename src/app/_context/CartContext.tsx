@@ -1,5 +1,5 @@
 import React from 'react'
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer, useContext } from 'react';
 
 const cartReducer = (state:any, action:any) => {
   switch (action.type) {
@@ -25,5 +25,7 @@ export const CartContext = ({children}:{children:React.ReactNode}) => {
       </cartcontext.Provider>
     </div>
   )
-}
+};
+
+export const useCart = () => useContext(cartcontext);
 
