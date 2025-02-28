@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState, useEffect, useReducer, useContext} from 'react';
 import {ProductItem} from './ProductItem';
-import {CartContext} from '../_context/CartContext'
+import {CartProvider } from '../_context/CartContext'
 
 const product = [
     {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, image: '/images/iphone16pro.png'},
@@ -33,14 +33,11 @@ export const ProductList = () => {
                     </div>
                 </form>
             </div>
-            <CartContext>
                 <div className="grid grid-cols-4 gap-4 mt-14">
                     {filteredProducts.map((product) => (
                         <ProductItem key={product.id} product={product} />
                     ))}
                 </div>
-            </CartContext>
-           
             </div>
         </div>
     )

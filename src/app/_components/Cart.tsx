@@ -2,7 +2,6 @@ import React from 'react'
 import { FaShoppingCart } from "react-icons/fa";
 import { CartItems } from './CartItems';
 import {useCart} from "../_context/CartContext"
-import {CartContext} from '../_context/CartContext'
 
 export const Cart = () => {
   const {cartState, dispatch} = useCart();
@@ -14,11 +13,10 @@ export const Cart = () => {
     <div>
       <div className="mb-10 text-center font-bold">
         <div className="text-center">
-            <div className="flex items-center justify-center mb-3 mt-24">
-                <h1 className='text-3xl'>My Cart</h1>
-                <CartContext>
+            <div className=" mb-3 mt-24">
+                <h1 className='text-3xl text-center'>My Cart</h1>
                   {cartState.items.length === 0 ? (
-                    <p>Your cart is empty!</p>
+                    <p className='mt-2 text-gray-600'>Your cart is empty!</p>
                   ) : (
                     <div className="">
                           {cartState.items.map((item:any) => (
@@ -26,14 +24,10 @@ export const Cart = () => {
                           ))}
                     <button onClick={clearCart}>Check out</button>
                     </div>
-                  )};
-                </CartContext>
-                
+                  )}
             </div>
         </div>
         </div>
     </div>
   )
 }
-
-export default Cart

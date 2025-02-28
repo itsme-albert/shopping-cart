@@ -8,7 +8,7 @@ const cartReducer = (state:any, action:any) => {
     case 'REMOVE':
       return {...state, items: state.items.filter((item:any) => item.id !== action.id)}
     case 'CHECKOUT':
-      return [];
+      return {items: []};
     default:
       return state;
   }
@@ -16,7 +16,7 @@ const cartReducer = (state:any, action:any) => {
 
 const CartContextInstance  = createContext<any>(null);
 
-export const CartContext = ({children}:{children:React.ReactNode}) => {
+export const CartProvider = ({children}:{children:React.ReactNode}) => {
   const [cartState, dispatch] = useReducer(cartReducer, {items: []});
   return (
     <div>

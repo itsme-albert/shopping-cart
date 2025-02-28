@@ -4,32 +4,14 @@ import {ProductList} from "./_components/ProductList";
 import {Cart} from "./_components/Cart";
 import { FaOpencart } from "react-icons/fa";
 import { RiShoppingCartFill } from "react-icons/ri";
-
-const CartContext = createContext<any>(null);
-export const useCart = () => useContext(CartContext);
+import {CartProvider } from './_context/CartContext'
 
 export default function Home() {
   const [cartVisible, setCartVisible] = useState(false);
-  const [cart, setCart] = useState([]);
 
   const toggleCart = () => {
     setCartVisible((prev) => !prev);
   };
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCart(savedCart);
-  }, []);
-
-  const addToCart = () => {
-
-  };
-  const removeToCart = () => {};
-  const checkOut = () => {};
 
   return (
     <div className="bg-white min-h-screen">
@@ -47,7 +29,7 @@ export default function Home() {
         </nav>
       </div>
       <div className="flex flex-col md:flex-row h-full">
-        <CartContext.Provider value={{ cart, addToCart, removeToCart, checkOut }}>
+        <CartProvider >
           <div className="m-10 mt-24 w-full md:w-12/12">
             <ProductList />
           </div>
@@ -58,7 +40,7 @@ export default function Home() {
           >
             <Cart />
           </div>
-        </CartContext.Provider>
+        </CartProvider >
       </div>
     </div>
   );
