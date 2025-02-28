@@ -20,8 +20,9 @@ export const Cart = () => {
                 ) : (
                   <div className="">
                         {cartState.items.map((item:any) => (
-                          <CartItems key={item.id} product={item}/>
+                          <CartItems key={item.id} item={item}/>
                         ))}
+                  <button onClick={clearCart}>Check out</button>
                   </div>
                 )};
             </div>
