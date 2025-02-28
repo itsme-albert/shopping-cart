@@ -34,7 +34,7 @@ export const ProductList = () => {
             </div>
             <div className="grid grid-cols-4 gap-4 mt-14">
                 {filteredProducts.map((product) => (
-                    <ProductItem key={product.id} product={product} />
+                    <ProductItem key={product.id} name={product.name} image={product.image} price={product.price} />
                 ))}
             </div>
             </div>

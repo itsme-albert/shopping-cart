@@ -5,8 +5,8 @@ import {Cart} from "./_components/Cart";
 import { FaOpencart } from "react-icons/fa";
 import { RiShoppingCartFill } from "react-icons/ri";
 
-// const CartContext = createContext();
-
+const CartContext = createContext<any>(null);
+export const useCart = () => useContext(CartContext);
 
 export default function Home() {
   const [cartVisible, setCartVisible] = useState(false);
@@ -20,7 +20,14 @@ export default function Home() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = () => {};
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCart(savedCart);
+  }, []);
+
+  const addToCart = () => {
+    
+  };
   const removeToCart = () => {};
   const checkOut = () => {};
 
@@ -40,19 +47,19 @@ export default function Home() {
         </nav>
       </div>
       <div className="flex flex-col md:flex-row h-full">
-        <div className="m-10 mt-24 w-full md:w-12/12">
-          <ProductList />
-        </div>
-        <div
-          className={`fixed top-0 right-0 h-full w-3/12 bg-white border-l-2 border-gray-200 transition-transform duration-300 ease-in-out transform ${
-            cartVisible ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          {/* <Cart /> */}
-        </div>
+        <CartContext.Provider value={{ cart, addToCart, removeToCart, checkOut }}>
+          <div className="m-10 mt-24 w-full md:w-12/12">
+            <ProductList />
+          </div>
+          <div
+            className={`fixed top-0 right-0 h-full w-3/12 bg-white border-l-2 border-gray-200 transition-transform duration-300 ease-in-out transform ${
+              cartVisible ? "translate-x-0" : "translate-x-full"
+            }`}
+          >
+            {/* <Cart /> */}
+          </div>
+        </CartContext.Provider>
       </div>
     </div>
   );
 }
-
-// export const useCart = () => useContext(CartContext);

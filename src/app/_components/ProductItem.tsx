@@ -2,7 +2,7 @@ import React from 'react'
 import { MdOutlineStar } from "react-icons/md";
 import Image from 'next/image'
 
-export const ProductItem = (product:any) => {
+export const ProductItem = (product:{name:string, image:string, price:number}) => {
     return (
       <div>
         <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
