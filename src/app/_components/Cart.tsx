@@ -22,7 +22,7 @@ export const Cart = () => {
                           {cartState.items.map((item:any) => (
                             <CartItems key={item.id} item={item}/>
                           ))}
-                    <button onClick={clearCart}>Check out</button>
+                    <button className='bg-orange-600 text-white p-3 rounded-sm mt-3' onClick={clearCart}>Check out</button>
                     </div>
                   )}
             </div>
