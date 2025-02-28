@@ -11,10 +11,10 @@ type PropsItem = {
 }
 
 export const CartItems = ({item}:PropsItem) => {
-    const {removeItem} = useCart()
+    const {dispatch} = useCart()
 
     const removeFromCart = () => {
-        removeItem({type: 'REMOVE', id: item.id})
+        dispatch({type: 'REMOVE', id: item.id})
     };
     return (
         <div className='text-center justify-center'>
