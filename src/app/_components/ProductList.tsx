@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState, useEffect, useReducer, useContext} from 'react';
 import {ProductItem} from './ProductItem';
+import { supabase } from '../lib/supabase';
 
 const product = [
     {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, quantity:1, image: '/images/iphone16pro.png'},
@@ -16,8 +17,16 @@ export const ProductList = () => {
         return product.name.toLowerCase().includes(search.toLowerCase());
     });
 
+    // const insert =  async () => {
+    //     const { error } = await supabase
+    //     .from('cart')
+    //     .insert({ name: 'Pocco', price: 2.45 , quantity: 5 })
+    //   console.log(error)
+    // }
+
     return (
         <div className=''>
+            {/* <button type='button' onClick={insert}>Insert</button> */}
         <div>
             <div className="mb-10 text-center font-bold">
                 <h1 className='text-3xl'>List of Products</h1>
