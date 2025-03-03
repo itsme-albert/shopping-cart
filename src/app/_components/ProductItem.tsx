@@ -2,6 +2,7 @@ import React from 'react'
 import { MdOutlineStar } from "react-icons/md";
 import Image from 'next/image'
 import {useCart} from '../_context/CartContext'
+import { supabase } from '../lib/supabase';
 
 type ProductProp = {
     product:{
@@ -13,11 +14,14 @@ type ProductProp = {
 }
 
 export const ProductItem = ({product}:ProductProp) => {
-    const {cartState, dispatch} = useCart();
+    const {dispatch} = useCart();
     
-    const addToCart = () => {
+    const addToCart = async () => {
         dispatch({type: 'ADD', item: product})
-        console.log(dispatch)
+        const { error } = await supabase
+        .from('cart')
+        .insert({ name: product.name, image: product.image, price: product.price, quantity: product.quantity, status: 'inCart' })   
+        console.log(error)
     };
     return (
       <div>

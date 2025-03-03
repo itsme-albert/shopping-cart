@@ -1,9 +1,14 @@
 import React from 'react'
 import { createContext, useReducer, useContext } from 'react';
 import {CartPersist} from '../_cartpersist/CartPersist'
+import { supabase } from '../lib/supabase';
 
-const cartReducer = (state:any, action:any) => {
+
+const cartReducer =  (state:any, action:any) => {
   switch (action.type) {
+    case 'SET_CART': 
+      return { ...state, cart: action.cart }
+      
     case 'ADD':
       const existingItem = state.items.find((item:any) => item.id === action.item.id);
       let updatedItem;
@@ -11,6 +16,7 @@ const cartReducer = (state:any, action:any) => {
       if(existingItem){
         updatedItem = state.items.map((item:any) => 
           item.id === action.item.id ? {...item, quantity: item.quantity + action.item.quantity} : item);
+
       }else{
         updatedItem = [...state.items, action.item];
       }
@@ -48,6 +54,7 @@ const getInitialCart = () => {
     return JSON.parse(localStorage.getItem("Cart") || "null");
   }
   return { items: [] };
+    
 };
 
 export const CartProvider = ({children}:{children:React.ReactNode}) => {
@@ -63,5 +70,5 @@ export const CartProvider = ({children}:{children:React.ReactNode}) => {
   )
 };
 
-export const useCart = () => useContext(CartContextInstance);
 
+export const useCart = () => useContext(CartContextInstance);
