@@ -1,7 +1,7 @@
 import React from 'react'
-import { FaShoppingCart } from "react-icons/fa";
 import { CartItems } from './CartItems';
 import {useCart} from "../_context/CartContext"
+import { CartItem } from '../utils/cart';
 
 export const Cart = () => {
   const {cartState, dispatch} = useCart();
@@ -19,7 +19,7 @@ export const Cart = () => {
                     <p className='mt-2 text-gray-600'>Your cart is empty!</p>
                   ) : (
                     <div className="">
-                          {cartState.items.map((item:any) => (
+                          {cartState.items.map((item: CartItem) => (
                             <CartItems key={item.id} item={item}/>
                           ))}
                     <button className='bg-orange-600 text-white p-3 rounded-sm mt-3' onClick={clearCart}>Check out</button>

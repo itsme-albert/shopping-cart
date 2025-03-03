@@ -1,6 +1,7 @@
 import React from 'react';
-import {useState, useEffect, useReducer, useContext} from 'react';
+import {useState} from 'react';
 import {ProductItem} from './ProductItem';
+import { CartItem } from '../utils/cart';
 
 const product = [
     {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, quantity:1, image: '/images/iphone16pro.png'},
@@ -12,7 +13,7 @@ const product = [
 export const ProductList = () => {
     const [search, setSearch] = useState("");
 
-    const filteredProducts = product.filter((product) => {
+    const filteredProducts = product.filter((product: CartItem) => {
         return product.name.toLowerCase().includes(search.toLowerCase());
     });
 
@@ -33,7 +34,7 @@ export const ProductList = () => {
                 </form>
             </div>
                 <div className="grid grid-cols-4 gap-4 mt-14">
-                    {filteredProducts.map((product) => (
+                    {filteredProducts.map((product: CartItem) => (
                         <ProductItem key={product.id} product={product} />
                     ))}
                 </div>
@@ -41,4 +42,3 @@ export const ProductList = () => {
         </div>
     )
 }
-

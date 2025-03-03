@@ -2,22 +2,17 @@ import React from 'react'
 import Image from 'next/image'
 import { HiOutlineTrash } from "react-icons/hi2";
 import {useCart} from '../_context/CartContext'
+import { CartItem } from '../utils/cart';
 
-type PropsItem = {
-    item: {
-        id: string,
-        name: string,
-        image:string,
-        quantity: number,
-        price: number,
-    }
+interface CartItemProps {
+    item: CartItem
 }
 
-export const CartItems = ({item}:PropsItem) => {
+export const CartItems: React.FC<CartItemProps> = ({ item }) => {
     const {dispatch} = useCart()
 
     const removeFromCart = () => {
-        dispatch({type: 'REMOVE', id: item.id})
+        dispatch({type: 'REMOVE_ITEM', id: item.id})
     };
 
     const minusQty = () => {

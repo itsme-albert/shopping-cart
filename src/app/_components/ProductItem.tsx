@@ -2,18 +2,15 @@ import React from 'react'
 import { MdOutlineStar } from "react-icons/md";
 import Image from 'next/image'
 import {useCart} from '../_context/CartContext'
+import { CartItem } from '../utils/cart';
 
-type ProductProp = {
-    product:{
-        name: string,
-        image: string,
-        quantity: number,
-        price:number,
-    }
+interface ProductItemProps {
+    product: CartItem;
+
 }
 
-export const ProductItem = ({product}:ProductProp) => {
-    const {cartState, dispatch} = useCart();
+export const ProductItem = ({ product }: ProductItemProps) => {
+    const { dispatch } = useCart();
     
     const addToCart = () => {
         dispatch({type: 'ADD', item: product})
