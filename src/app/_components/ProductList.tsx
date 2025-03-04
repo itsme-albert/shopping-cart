@@ -4,10 +4,10 @@ import {ProductItem} from './ProductItem';
 import { CartItem } from '../utils/cart';
 
 const product = [
-    {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, quantity:1, image: '/images/iphone16pro.png'},
-    {id: 2, name: 'S25 ULTRA 12/256GB T.SBLU SAMSUNG SM-S938 GALAXY', price: 84990, quantity:1, image: '/images/s25ultra.png'},
-    {id: 3, name: 'IPHONE 15 PRO 256GB WHITE TITNM APPLE', price: 68990, quantity:1, image: '/images/iphone15.png'},
-    {id: 4, name: 'IS25+ 12/256GB MINT SAMSUNG SM-S936 GALAXY', price: 67990, quantity:1, image: '/images/s25plus.png'},
+    {productId: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, quantity:1, image: '/images/iphone16pro.png'},
+    {productId: 2, name: 'S25 ULTRA 12/256GB T.SBLU SAMSUNG SM-S938 GALAXY', price: 84990, quantity:1, image: '/images/s25ultra.png'},
+    {productId: 3, name: 'IPHONE 15 PRO 256GB WHITE TITNM APPLE', price: 68990, quantity:1, image: '/images/iphone15.png'},
+    {productId: 4, name: 'IS25+ 12/256GB MINT SAMSUNG SM-S936 GALAXY', price: 67990, quantity:1, image: '/images/s25plus.png'},
 ];
 
 export const ProductList = () => {
@@ -35,7 +35,7 @@ export const ProductList = () => {
             </div>
                 <div className="grid grid-cols-4 gap-4 mt-14">
                     {filteredProducts.map((product: CartItem) => (
-                        <ProductItem key={product.id} product={product} />
+                        <ProductItem key={product.productId} product={product} />
                     ))}
                 </div>
             </div>

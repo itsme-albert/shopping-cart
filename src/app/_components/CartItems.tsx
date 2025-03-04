@@ -3,6 +3,8 @@ import Image from 'next/image'
 import { HiOutlineTrash } from "react-icons/hi2";
 import {useCart} from '../_context/CartContext'
 import { CartItem } from '../utils/cart';
+import { useMutation } from 'convex/react';
+import { api } from '../../../convex/_generated/api';
 
 interface CartItemProps {
     item: CartItem
@@ -10,18 +12,30 @@ interface CartItemProps {
 
 export const CartItems: React.FC<CartItemProps> = ({ item }) => {
     const {dispatch} = useCart()
+    const updateCartQuantity = useMutation(api.cart.updateCartQuantity);
+    const removeItem = useMutation(api.cart.removeItem);
 
     const removeFromCart = () => {
-        dispatch({type: 'REMOVE_ITEM', id: item.id})
+        dispatch({type: 'REMOVE_ITEM', productId: item.productId})
+        removeItem({ productId: item.productId });
     };
 
     const minusQty = () => {
-        if(item.quantity > 1) {
-            dispatch({type: 'DECREMENT', id: item.id})
+        if (item.quantity > 1) {
+          dispatch({ type: 'DECREMENT', productId: item.productId });
+          updateCartQuantity({
+            productId: item.productId,
+            quantity: item.quantity - 1,
+          });
         }
-    }
+      };
     const plusQty = () => {
-        dispatch({type: 'INCREMENT', id: item.id})
+        dispatch({type: 'INCREMENT', productId: item.productId})
+        updateCartQuantity({
+            productId: item.productId,
+            quantity: item.quantity + 1,
+        });
+
     }
 
     return (
@@ -35,7 +49,7 @@ export const CartItems: React.FC<CartItemProps> = ({ item }) => {
                             <div className="flex items-center mt-2.5">
                                 <span className="text-md text-gray-900 dark:text-white">Php {item.price}</span>
                                 <div className="inline-flex rounded-md shadow-xs ml-3" role="group">
-                                    <button type="button" className="px-2 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white" onClick={minusQty}>
+                                    <button type="button" className="px-2 py-1 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white" onClick={() => minusQty()}>
                                         -
                                     </button>
                                     <button type="button" className="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:ring-blue-500 dark:focus:text-white">
