@@ -11,7 +11,7 @@ import { ConvexProvider, ConvexReactClient, useQuery } from "convex/react";
 
 const convex = new ConvexReactClient("https://befitting-mockingbird-971.convex.cloud");
 
-export function Home(){
+export default function Home(){
   return (
     <ConvexProvider client={convex}>
       <CartProvider>
