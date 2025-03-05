@@ -2,22 +2,33 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const addToCart = mutation({
-    args: {
-        productId: v.number(),
-        name: v.string(),
-        price: v.number(),
-        quantity: v.number(),
-        image: v.string(),
-      },
-      handler: async (ctx, args) => {
-        await ctx.db.insert("carts", {
-            productId: args.productId,
-            name: args.name,
-            price: args.price,
-            quantity: args.quantity,
-            image: args.image,
-        });
-      },
+  args: {
+    productId: v.number(),
+    name: v.string(),
+    price: v.number(),
+    quantity: v.number(),
+    image: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const existingCartItem = await ctx.db
+      .query("carts")
+      .withIndex("by_productId", (q) => q.eq("productId", args.productId))
+      .first();
+
+    if (existingCartItem) {
+      await ctx.db.patch(existingCartItem._id, {
+        quantity: existingCartItem.quantity + args.quantity,
+      });
+    } else {
+      await ctx.db.insert("carts", {
+        productId: args.productId,
+        name: args.name,
+        price: args.price,
+        quantity: args.quantity,
+        image: args.image,
+      });
+    }
+  },
 });
 
 export const fetchCart = query({
@@ -69,5 +80,12 @@ export const updateCartQuantity = mutation({
         quantity: args.quantity,
       });
     },
-  });
+});
+
+export const countCartItem = query({
+  handler: async (ctx) => {
+    const item = await ctx.db.query("carts").collect()
+    return item.length;
+  }
+})
   
