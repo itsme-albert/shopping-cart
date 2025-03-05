@@ -71,11 +71,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   CartPersist(cartState);
 
   return (
-    <ConvexProvider client={convex}>
-      <CartContextInstance.Provider value={{ cartState, dispatch }}>
-        {children}
-      </CartContextInstance.Provider>
-    </ConvexProvider>
+      <ConvexProvider client={convex}>
+        <CartContextInstance.Provider value={{ cartState, dispatch }}>
+          {children}
+        </CartContextInstance.Provider>
+      </ConvexProvider>
   );
 };
 

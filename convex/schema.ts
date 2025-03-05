@@ -9,4 +9,12 @@ export default defineSchema({
       quantity: v.number(),
       image: v.string(),
     }).index("by_productId", ["productId"]),
-  });
+
+    users: defineTable({
+        email: v.string(),
+        password: v.string(),
+        name: v.optional(v.string()),
+        createdAt: v.number()
+    }).index('by_email', ['email'])
+});
+

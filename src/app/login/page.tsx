@@ -27,7 +27,7 @@ export default function Login() {
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                             <input type="password" id="password" title="Password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your password" required />
                         </div>
-                        <button type="submit" className="text-white focus:ring-4 focus:outline-none font-medium rounded-sm text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-orange-600">Submit</button>
+                        <button type="submit" className="text-white focus:ring-4 focus:outline-none font-medium rounded-sm text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-orange-600">Login</button>
                     </form>
                 </div>
             )}
