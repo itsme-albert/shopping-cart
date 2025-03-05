@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useContext, createContext } from "react";
+import { useState } from "react";
 import {ProductList} from "./_components/ProductList";
 import {Cart} from "./_components/Cart";
 import { FaOpencart } from "react-icons/fa";

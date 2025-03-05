@@ -1,32 +1,24 @@
 import React from 'react';
-import {useState, useEffect, useReducer, useContext} from 'react';
+import {useState} from 'react';
 import {ProductItem} from './ProductItem';
-import { supabase } from '../lib/supabase';
+import { CartItem } from '../utils/utils';
 
 const product = [
-    {id: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, quantity:1, image: '/images/iphone16pro.png'},
-    {id: 2, name: 'S25 ULTRA 12/256GB T.SBLU SAMSUNG SM-S938 GALAXY', price: 84990, quantity:1, image: '/images/s25ultra.png'},
-    {id: 3, name: 'IPHONE 15 PRO 256GB WHITE TITNM APPLE', price: 68990, quantity:1, image: '/images/iphone15.png'},
-    {id: 4, name: 'IS25+ 12/256GB MINT SAMSUNG SM-S936 GALAXY', price: 67990, quantity:1, image: '/images/s25plus.png'},
+    {productId: 1, name: 'IPHONE 16 PRO MAX 256GB DESERT TITANIUM APPLE', price: 86885, quantity:1, image: '/images/iphone16pro.png'},
+    {productId: 2, name: 'S25 ULTRA 12/256GB T.SBLU SAMSUNG SM-S938 GALAXY', price: 84990, quantity:1, image: '/images/s25ultra.png'},
+    {productId: 3, name: 'IPHONE 15 PRO 256GB WHITE TITNM APPLE', price: 68990, quantity:1, image: '/images/iphone15.png'},
+    {productId: 4, name: 'IS25+ 12/256GB MINT SAMSUNG SM-S936 GALAXY', price: 67990, quantity:1, image: '/images/s25plus.png'},
 ];
 
 export const ProductList = () => {
     const [search, setSearch] = useState("");
 
-    const filteredProducts = product.filter((product) => {
+    const filteredProducts = product.filter((product: CartItem) => {
         return product.name.toLowerCase().includes(search.toLowerCase());
     });
 
-    // const insert =  async () => {
-    //     const { error } = await supabase
-    //     .from('cart')
-    //     .insert({ name: 'Pocco', price: 2.45 , quantity: 5 })
-    //   console.log(error)
-    // }
-
     return (
         <div className=''>
-            {/* <button type='button' onClick={insert}>Insert</button> */}
         <div>
             <div className="mb-10 text-center font-bold">
                 <h1 className='text-3xl'>List of Products</h1>
@@ -42,12 +34,11 @@ export const ProductList = () => {
                 </form>
             </div>
                 <div className="grid grid-cols-4 gap-4 mt-14">
-                    {filteredProducts.map((product) => (
-                        <ProductItem key={product.id} product={product} />
+                    {filteredProducts.map((product: CartItem) => (
+                        <ProductItem key={product.productId} product={product} />
                     ))}
                 </div>
             </div>
         </div>
     )
 }
-

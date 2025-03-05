@@ -2,26 +2,18 @@ import React from 'react'
 import { MdOutlineStar } from "react-icons/md";
 import Image from 'next/image'
 import {useCart} from '../_context/CartContext'
-import { supabase } from '../lib/supabase';
+import { CartItem } from '../utils/utils';
 
-type ProductProp = {
-    product:{
-        name: string,
-        image: string,
-        quantity: number,
-        price:number,
-    }
+interface ProductItemProps {
+    product: CartItem;
+
 }
 
-export const ProductItem = ({product}:ProductProp) => {
-    const {dispatch} = useCart();
+export const ProductItem = ({ product }: ProductItemProps) => {
+    const { dispatch } = useCart();
     
-    const addToCart = async () => {
+    const handleAddToCart = () => {
         dispatch({type: 'ADD', item: product})
-        const { error } = await supabase
-        .from('cart')
-        .insert({ name: product.name, image: product.image, price: product.price, quantity: product.quantity, status: 'inCart' })   
-        console.log(error)
     };
     return (
       <div>
@@ -41,7 +33,7 @@ export const ProductItem = ({product}:ProductProp) => {
                   </div>
                   <div className="flex items-center justify-between">
                       <span className="text-2xl font-bold text-gray-900 dark:text-white">Php {product.price}</span>
-                      <button className="text-white focus:ring-4 focus:outline-none bg-orange-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={addToCart}>Add to cart</button>
+                      <button type="button" className="text-white focus:ring-4 focus:outline-none bg-orange-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center" onClick={handleAddToCart}>Add to cart</button>
                   </div>
               </div>
           </div>

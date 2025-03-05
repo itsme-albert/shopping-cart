@@ -1,72 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import { FaShoppingCart } from "react-icons/fa";
+import React, { useState, useEffect } from 'react'
 import { CartItems } from './CartItems';
 import {useCart} from "../_context/CartContext"
-import { supabase } from '../lib/supabase';
+import { CartItem } from '../utils/utils';
 
 export const Cart = () => {
   const {cartState, dispatch} = useCart();
-  const [cart, setCart] = useState<any[]>([]);
+  const [total, setTotal] = useState(0)
+
+  const clearCart = () => {
+    dispatch({ type: 'CHECKOUT' });
+    localStorage.removeItem('cartTotal');
+    localStorage.removeItem('Cart');
+  };
 
   useEffect(() => {
-    const fetchCart = async () => {
-      const { data: cartState, error } = await supabase
-        .from('cart')
-        .select('*')
-        .order('id', { ascending: false });
-        
-      if (error) {
-        console.error(error);
-      } else {
-        dispatch({ type: 'SET_CART', result: cartState });
-      }
-      if (cartState) {
-        setCart(cartState);
-      }
-    };
-    fetchCart();
+    const calculatedTotal = cartState.items.reduce(
+    (total, item) => total + item.price * item.quantity, 0);
+    setTotal(calculatedTotal);
+    localStorage.setItem('cartTotal', JSON.stringify(calculatedTotal));
+  }, [cartState.items]);
 
-    const handleInserts = (result: any) => {
-      console.log('Change received!', result);
-      fetchCart();
-    };
+  useEffect(() => {
+    const savedTotal = localStorage.getItem('cartTotal');
+    if (savedTotal) {
+      setTotal(JSON.parse(savedTotal));
+    }
+  }, []);
 
-    const subscription = supabase
-      .channel('cart')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'cart' }, handleInserts)
-      .subscribe();
-
-    return () => {
-      supabase.removeChannel(subscription);
-    };
-  }, [cart]);
-
-  const clearCart = async () => {
-    dispatch({type: 'CHECKOUT'})
-    const {error} = await supabase
-    .from('cart')
-    .delete()
-    .eq('status', 'inCart')
-    console.log(error)
-  };
   return (
     <div>
       <div className="mb-10 text-center font-bold">
         <div className="text-center">
             <div className=" mb-3 mt-24">
                 <h1 className='text-3xl text-center'>My Cart</h1>
-                  {cart.length === 0 ? (
+                  {cartState && cartState.items.length === 0 ? (
                     <p className='mt-2 text-gray-600'>Your cart is empty!</p>
                   ) : (
                     <div className="">
-                          {cart.map((item:any) => (
-                            <CartItems key={item.id} item={item}/>
+                          {cartState && cartState.items.map((item: CartItem) => (
+                            <CartItems key={item.productId} item={item}/>
                           ))}
-                    <button className='bg-orange-600 text-white p-3 rounded-sm mt-3' onClick={clearCart}>Check out</button>
+                        <div className="m-3 text-left text-lg">
+                          <h1>Total: Php {total}</h1>
+                        </div>
+                      <button type="button" className='bg-orange-600 text-white p-3 rounded-sm mt-3' onClick={clearCart}>Check out</button>
                     </div>
                   )}
             </div>
         </div>
+       
         </div>
     </div>
   )
