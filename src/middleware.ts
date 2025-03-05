@@ -1,16 +1,9 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { clerkMiddleware } from "@clerk/nextjs/server"
 
-export function middleware(request: NextRequest) {
-  const isLoggedIn = false; 
-  
-  if (!isLoggedIn && request.nextUrl.pathname.startsWith('/')) {
-    return NextResponse.redirect(new URL('/login', request.url));
-  }
-
-  return NextResponse.next();
-}
+export default clerkMiddleware({
+  afterSignInUrl: "/",
+});
 
 export const config = {
-  matcher: ['//:path*'],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

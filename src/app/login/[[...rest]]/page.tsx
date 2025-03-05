@@ -9,7 +9,7 @@ export default function Login() {
     return (
         <ClerkProvider publishableKey="pk_test_cG9zaXRpdmUteWV0aS03NS5jbGVyay5hY2NvdW50cy5kZXYk">
             <ConvexProvider client={convex}>
-                <SignIn path="/login" routing="path" />
+                <SignIn path="/login" routing="path" fallbackRedirectUrl="/"/>
             </ConvexProvider>
         </ClerkProvider>
     );
