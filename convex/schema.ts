@@ -11,10 +11,10 @@ export default defineSchema({
     }).index("by_productId", ["productId"]),
 
     users: defineTable({
-        email: v.string(),
-        password: v.string(),
-        name: v.optional(v.string()),
-        createdAt: v.number()
-    }).index('by_email', ['email'])
+      clerkId: v.string(),
+      email: v.string(),
+      name: v.string(),
+      imageUrl: v.string(),
+    }),    
 });
 
