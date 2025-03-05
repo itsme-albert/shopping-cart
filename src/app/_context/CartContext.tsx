@@ -10,8 +10,8 @@ const cartReducer = (state: CartState, action: CartActionType): CartState => {
   switch (action.type) {
     case 'ADD':
       const existingItem = state.items.find((item: CartItem) => item.productId === action.item.productId);
-      let updatedItems;
       
+      let updatedItems;
       if (existingItem) {
         updatedItems = state.items.map((item: CartItem) => 
           item.productId === action.item.productId ? {...item, quantity: item.quantity + action.item.quantity} : item);
@@ -24,8 +24,8 @@ const cartReducer = (state: CartState, action: CartActionType): CartState => {
       return updatedFromAdd;
 
     case 'REMOVE_ITEM':
-      const idToDelete = state.items.filter((item: CartItem) => item.productId !== action.productId);
-      const updatedFromRemove = { ...state, items: idToDelete };
+      const newItems = state.items.filter((item: CartItem) => item.productId !== action.productId);
+      const updatedFromRemove = { ...state, items: newItems };
       localStorage.setItem('Cart', JSON.stringify(updatedFromRemove));
       return updatedFromRemove;
 
@@ -48,10 +48,6 @@ const cartReducer = (state: CartState, action: CartActionType): CartState => {
           item.productId === action.productId ? { ...item, quantity: item.quantity + 1 } : item
         )
       };
-
-    case 'CLEAR_CART':
-      localStorage.removeItem('Cart');
-      return { items: [] };
 
     default:
       return state;
