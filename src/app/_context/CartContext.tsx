@@ -2,9 +2,8 @@ import React from 'react';
 import { createContext, useReducer, useContext } from 'react';
 import { CartPersist } from '../_cartpersist/CartPersist';
 import { CartActionType, CartItem, CartState } from '../utils/cart';
-import { ConvexProvider, ConvexReactClient } from 'convex/react';
+import { ClerkProvider, SignedIn,SignedOut,SignIn  } from "@clerk/clerk-react";
 
-const convex = new ConvexReactClient("https://befitting-mockingbird-971.convex.cloud");
 
 const cartReducer = (state: CartState, action: CartActionType): CartState => {
   switch (action.type) {
@@ -61,21 +60,24 @@ interface CartContextType {
 
 const CartContextInstance = createContext<CartContextType | null>(null);
 
-const getInitialCart = (): CartState => {
-  const storedCart = localStorage.getItem('Cart');
-  return storedCart ? JSON.parse(storedCart) : {items: []}
-};
-
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cartState, dispatch] = useReducer(cartReducer, getInitialCart());
+  const [cartState, dispatch] = useReducer(cartReducer, {items: []});
   CartPersist(cartState);
 
   return (
-      <ConvexProvider client={convex}>
-        <CartContextInstance.Provider value={{ cartState, dispatch }}>
-          {children}
-        </CartContextInstance.Provider>
-      </ConvexProvider>
+      <ClerkProvider publishableKey="pk_test_cG9zaXRpdmUteWV0aS03NS5jbGVyay5hY2NvdW50cy5kZXYk">
+            <CartContextInstance.Provider value={{ cartState, dispatch }}>
+            
+                <SignedIn>
+                  {children} 
+                </SignedIn>
+          
+                <SignedOut>
+                  <SignIn routing="hash" />
+                </SignedOut>
+        
+            </CartContextInstance.Provider>
+        </ClerkProvider>
   );
 };
 

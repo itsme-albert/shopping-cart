@@ -1,8 +1,10 @@
-export default {
+const config = {
   providers: [
     {
-      domain: process.env.CONVEX_SITE_URL,
+      domain: "https://positive-yeti-75.clerk.accounts.dev",
       applicationID: "convex",
     },
-  ],
+  ]
 };
+
+export default config;
