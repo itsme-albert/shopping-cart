@@ -8,6 +8,7 @@ import { RiShoppingCartFill } from "react-icons/ri";
 import { CartProvider } from "./_context/CartContext";
 import { api } from "../../convex/_generated/api";
 import { ConvexProvider, ConvexReactClient, useQuery } from "convex/react";
+import { UserButton } from "@clerk/clerk-react";
 
 const convex = new ConvexReactClient("https://befitting-mockingbird-971.convex.cloud");
 
@@ -48,7 +49,7 @@ function MainPage() {
                 <button
                   aria-label="View Cart"
                   type="button"
-                  className="relative inline-flex items-center p-3 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none"
+                  className="mr-5 relative inline-flex items-center p-3 text-sm font-medium text-center text-white rounded-lg focus:ring-4 focus:outline-none"
                   onClick={toggleCart}
                 >
                   <RiShoppingCartFill className="text-black text-3xl" />
@@ -57,6 +58,7 @@ function MainPage() {
                       {countCartItem ?? 0}
                     </div>
                 </button>
+                <UserButton showName/>
               </div>
             </div>
           </nav>
