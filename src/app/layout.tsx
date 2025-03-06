@@ -30,7 +30,7 @@ export default function RootLayout({
         >
           <ClerkProvider>
             <SignedOut>
-              <div className="items-center">
+              <div className="items-center justify-center">
                 <SignIn routing="hash"/>
               </div>
             </SignedOut>
