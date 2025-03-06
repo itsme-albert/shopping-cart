@@ -2,9 +2,8 @@ import React from 'react';
 import { createContext, useReducer, useContext } from 'react';
 import { CartPersist } from '../_cartpersist/CartPersist';
 import { CartActionType, CartItem, CartState } from '../utils/cart';
-import { useAuth } from "@clerk/clerk-react";
+import { ClerkProvider, useAuth } from "@clerk/clerk-react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
-import { ClerkProvider } from '@clerk/nextjs';
 import { ConvexReactClient } from 'convex/react';
 
 const convex = new ConvexReactClient("https://befitting-mockingbird-971.convex.cloud");
