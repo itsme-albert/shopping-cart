@@ -5,26 +5,32 @@ import {useCart} from '../_context/CartContext'
 import { CartItem } from '../utils/cart';
 import { useMutation } from "convex/react";
 import { api } from '../../../convex/_generated/api';
+import { useUser } from '@clerk/clerk-react';
 
 interface ProductItemProps {
     product: CartItem;
-
 }
 
 export const ProductItem = ({ product }: ProductItemProps) => {
+    const { user } = useUser();
     const { dispatch } = useCart();
     const addToCart = useMutation(api.cart.addToCart);
     
     const handleAddToCart = () => {
         dispatch({type: 'ADD', item: product})
-        addToCart({ 
-            productId: product.productId,
-            name: product.name,
-            price: product.price,
-            quantity: product.quantity,
-            image: product.image, 
-        });
-        console.log(addToCart)
+        if (user) {
+            dispatch({type: 'ADD', item: product})
+            addToCart({ 
+                clerkId: user.id,
+                productId: product.productId,
+                name: product.name,
+                price: product.price,
+                quantity: product.quantity,
+                image: product.image, 
+            });
+        } else {
+            console.error("User is not logged in");
+        }
     };
     return (
       <div>

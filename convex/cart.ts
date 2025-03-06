@@ -3,6 +3,7 @@ import { v } from "convex/values";
 
 export const addToCart = mutation({
   args: {
+    clerkId: v.string(),
     productId: v.number(),
     name: v.string(),
     price: v.number(),
@@ -21,6 +22,7 @@ export const addToCart = mutation({
       });
     } else {
       await ctx.db.insert("carts", {
+        clerkId: args.clerkId,
         productId: args.productId,
         name: args.name,
         price: args.price,
@@ -32,8 +34,14 @@ export const addToCart = mutation({
 });
 
 export const fetchCart = query({
-    handler: async (ctx) => {
-      const cartItems = await ctx.db.query("carts").collect();
+  args: {
+    clerkId: v.string(),
+  },
+    handler: async (ctx, args) => {
+      const cartItems = await ctx.db
+        .query("carts")
+        .withIndex("by_clerkId", (q) => q.eq("clerkId", args.clerkId))
+        .collect();
       return cartItems;
     },
 });

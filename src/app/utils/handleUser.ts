@@ -4,7 +4,7 @@ import { api } from "../../../convex/_generated/api";
 import { useEffect } from "react";
 
 
-export const useHandleUser = () => {
+export const HandleUser = () => {
     const { user } = useUser();
     const saveUser = useMutation(api.users.saveUser);
 

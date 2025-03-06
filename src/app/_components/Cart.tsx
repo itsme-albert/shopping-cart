@@ -4,10 +4,12 @@ import {useCart} from "../_context/CartContext"
 import { CartItem } from '../utils/cart';
 import { api } from "../../../convex/_generated/api";
 import { useMutation, useQuery } from 'convex/react';
+import { useUser } from '@clerk/clerk-react';
 
 export const Cart = () => {
   const {cartState, dispatch} = useCart();
-  const fetchedCart = useQuery(api.cart.fetchCart);
+  const {user} = useUser();
+  const fetchedCart = useQuery(api.cart.fetchCart, user ? {clerkId: user.id} : "skip");
   const [total, setTotal] = useState(0)
   const deleteAllInCart = useMutation(api.cart.deleteAllInCart);
 
