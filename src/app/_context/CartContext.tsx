@@ -2,7 +2,10 @@ import React from 'react';
 import { createContext, useReducer, useContext } from 'react';
 import { CartPersist } from '../_cartpersist/CartPersist';
 import { CartActionType, CartItem, CartState } from '../utils/cart';
-import { ConvexProvider, ConvexReactClient } from 'convex/react';
+import { useAuth } from "@clerk/clerk-react";
+import { ConvexProviderWithClerk } from "convex/react-clerk";
+import { ClerkProvider } from '@clerk/nextjs';
+import { ConvexReactClient } from 'convex/react';
 
 const convex = new ConvexReactClient("https://befitting-mockingbird-971.convex.cloud");
 
@@ -71,11 +74,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   CartPersist(cartState);
 
   return (
-      <ConvexProvider client={convex}>
-        <CartContextInstance.Provider value={{ cartState, dispatch }}>
-          {children}
-        </CartContextInstance.Provider>
-      </ConvexProvider>
+      <ClerkProvider  publishableKey="pk_test_cG9zaXRpdmUteWV0aS03NS5jbGVyay5hY2NvdW50cy5kZXYk">
+        <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+          <CartContextInstance.Provider value={{ cartState, dispatch }}>
+            {children}
+          </CartContextInstance.Provider>
+        </ConvexProviderWithClerk>
+      </ClerkProvider>
   );
 };
 
